@@ -2,14 +2,14 @@
    "kind": "List",
    "apiVersion": "v1",
    "metadata": {
-      "name": "s2i-java"
+      "name": "s2i-oasp"
    },
    "items": [
       {
          "kind": "BuildConfig",
          "apiVersion": "v1",
          "metadata": {
-            "name": "s2i-java"
+            "name": "s2i-oasp"
          },
          "spec": {
             "triggers": [
@@ -33,7 +33,7 @@
             "source": {
                "type": "Git",
                "git": {
-                  "uri": "https://github.com/jorgemoralespou/s2i-java.git",
+                  "uri": "https://github.com/mickuehl/s2i-oasp.git",
                   "ref": "master"
                }
             },
@@ -49,7 +49,7 @@
             "output": {
                "to": {
                   "kind": "ImageStreamTag",
-                  "name": "s2i-java:latest"
+                  "name": "s2i-oasp:latest"
                }
             },
             "resources": {}
@@ -69,7 +69,7 @@
          "kind": "ImageStream",
          "apiVersion": "v1",
          "metadata": {
-            "name": "s2i-java"
+            "name": "s2i-oasp"
          },
          "spec": {
             "dockerImageRepository": "",
@@ -77,11 +77,11 @@
                {
                   "name": "latest",
                   "annotations": {
-                     "description": "Java OpenJDK S2I image",
-                     "iconClass": "icon-java",
-                     "tags": "builder,java,maven,gradle,springboot,vertx,wildfly-swarm,dropwizard,microservices,fatjar",
-                     "supports": "java:8,maven:3,gradle:2.6",
-                     "version": "1.0"
+                    "description": "The Open Application Standard Platform for Java S2I image",
+                    "iconClass": "icon-java",
+                    "tags": "builder,java,maven,springboot,oasp,microservices,fatjar",
+                    "supports": "java:8,maven:3,oasp:2.4",
+                    "version": "1.0"
                   }
                }
             ]
@@ -91,7 +91,7 @@
          "kind": "Template",
          "apiVersion": "v1",
          "metadata": {
-            "name": "springboot-helloworld-maven",
+            "name": "oasp-sample-maven",
             "annotations": {
                "description": "Sample Spring Boot helloworld built with maven",
                "iconClass": "icon-java",
@@ -100,36 +100,36 @@
 
          },
          "labels": {
-            "application": "springboot-helloworld-maven",
-            "createdBy": "template-springboot-helloworld-maven"
+            "application": "oasp-sample-maven",
+            "createdBy": "template-oasp-sample-maven"
          },
          "parameters": [
             {
                "description": "The name for the application.",
                "name": "APPLICATION_NAME",
-               "value": "helloworld-mvn",
+               "value": "oasp-mvn",
                "displayName": "Application name",
                "required": true
             },
             {
-               "description": "Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
+               "description": "Custom hostname for service routes. Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
                "name": "APPLICATION_HOSTNAME",
                "displayName": "Application hostname"
             },
             {
                "description": "Git source URI for application",
                "name": "GIT_URI",
-               "value": "https://github.com/jorgemoralespou/osev3-examples.git"
+               "value": "https://github.com/mickuehl/oasp4j.git"
             },
             {
                "description": "Git branch/tag reference",
                "name": "GIT_REF",
-               "value": "master"
+               "value": "develop"
             },
             {
                "description": "Git Directory",
                "name": "CONTEXT_DIR",
-               "value": "spring-boot/helloworld-springboot-maven"
+               "value": "samples"
             },
             {
                "description": "Application options. These options will be passed to the Spring Boot command line",
@@ -187,245 +187,7 @@
                      "sourceStrategy": {
                         "from": {
                            "kind": "ImageStreamTag",
-                           "name": "s2i-java:latest"
-                        }
-                     }
-                  },
-                  "output": {
-                     "to": {
-                        "kind": "ImageStreamTag",
-                        "name": "${APPLICATION_NAME}:latest"
-                     }
-                  },
-                  "resources": {}
-               }
-            },
-            {
-               "kind": "ImageStream",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "dockerImageRepository": "",
-                  "tags": [
-                     {
-                        "name": "latest"
-                     }
-                  ]
-               }
-            },
-            {
-               "kind": "DeploymentConfig",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "strategy": {
-                     "type": "Rolling",
-                     "rollingParams": {
-                        "updatePeriodSeconds": 1,
-                        "intervalSeconds": 1,
-                        "timeoutSeconds": 600
-                     },
-                     "resources": {}
-                  },
-                  "triggers": [
-                     {
-                        "type": "ConfigChange"
-                     },
-                     {
-                        "type": "ImageChange",
-                        "imageChangeParams": {
-                           "automatic": true,
-                           "containerNames": [
-                              "${APPLICATION_NAME}"
-                           ],
-                           "from": {
-                              "kind": "ImageStreamTag",
-                              "name": "${APPLICATION_NAME}:latest"
-                           }
-                        }
-                     }
-                  ],
-                  "replicas": 1,
-                  "selector": {
-                     "deploymentconfig": "${APPLICATION_NAME}"
-                  },
-                  "template": {
-                     "metadata": {
-                        "labels": {
-                           "deploymentconfig": "${APPLICATION_NAME}"
-                        }
-                     },
-                     "spec": {
-                        "containers": [
-                           {
-                              "name": "${APPLICATION_NAME}",
-                              "image": "${APPLICATION_NAME}",
-                              "ports": [
-                                 {
-                                    "containerPort": 8080,
-                                    "protocol": "TCP"
-                                 }
-                              ],
-                              "livenessProbe": {
-                                 "tcpSocket": {
-                                    "port": 8080
-                                 },
-                                 "initialDelaySeconds": 30,
-                                 "timeoutSeconds": 1
-                              },
-                              "resources": {},
-                              "terminationMessagePath": "/dev/termination-log",
-                              "imagePullPolicy": "IfNotPresent",
-                              "securityContext": {
-                                 "capabilities": {},
-                                 "privileged": false
-                              }
-                           }
-                        ],
-                        "restartPolicy": "Always",
-                        "dnsPolicy": "ClusterFirst"
-                     }
-                  }
-               }
-            },
-            {
-               "kind": "Route",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "host": "${APPLICATION_HOSTNAME}",
-                  "to": {
-                     "kind": "Service",
-                     "name": "${APPLICATION_NAME}"
-                  }
-               }
-            },
-            {
-               "kind": "Service",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "ports": [
-                     {
-                        "name": "${APPLICATION_NAME}-http",
-                        "port": 8080,
-                        "targetPort": 8080
-                     }
-                  ],
-                  "selector": {
-                     "deploymentconfig": "${APPLICATION_NAME}"
-                  },
-                  "type": "ClusterIP",
-                  "sessionAffinity": "None"
-               }
-            }
-         ]
-      },
-      {
-         "kind": "Template",
-         "apiVersion": "v1",
-         "metadata": {
-            "name": "springboot-helloworld-gradle",
-            "annotations": {
-               "description": "Sample Spring Boot helloworld built with gradle",
-               "iconClass": "icon-jboss",
-               "tags": "instant-app,springboot,gradle,java"
-            }
-
-         },
-         "labels": {
-            "application": "springboot-helloworld-gradle",
-            "createdBy": "template-springboot-helloworld-gradle"
-         },
-         "parameters": [
-            {
-               "description": "The name for the application.",
-               "name": "APPLICATION_NAME",
-               "value": "helloworld-gradle",
-               "displayName": "Application name",
-               "required": true
-            },
-            {
-               "description": "Custom hostname for service routes.  Leave blank for default hostname, e.g.: <application-name>.<project>.<default-domain-suffix>",
-               "name": "APPLICATION_HOSTNAME",
-               "displayName": "Application hostname"
-            },
-            {
-               "description": "Git source URI for application",
-               "name": "GIT_URI",
-               "value": "https://github.com/jorgemoralespou/osev3-examples.git"
-            },
-            {
-               "description": "Git branch/tag reference",
-               "name": "GIT_REF",
-               "value": "master"
-            },
-            {
-               "description": "Git Directory",
-               "name": "CONTEXT_DIR",
-               "value": "spring-boot/helloworld-springboot-gradle"
-            },
-            {
-               "description": "Github trigger secret",
-               "name": "GITHUB_TRIGGER_SECRET",
-               "from": "[a-zA-Z0-9]{8}",
-               "generate": "expression"
-            },
-            {
-               "description": "Generic build trigger secret",
-               "name": "GENERIC_TRIGGER_SECRET",
-               "from": "[a-zA-Z0-9]{8}",
-               "generate": "expression"
-            }
-         ],
-         "objects": [
-            {
-               "kind": "BuildConfig",
-               "apiVersion": "v1",
-               "metadata": {
-                  "name": "${APPLICATION_NAME}"
-               },
-               "spec": {
-                  "triggers": [
-                     {
-                        "type": "GitHub",
-                        "github": {
-                           "secret": "${GITHUB_TRIGGER_SECRET}"
-                        }
-                     },
-                     {
-                        "type": "Generic",
-                        "generic": {
-                           "secret": "${GENERIC_TRIGGER_SECRET}"
-                        }
-                     },
-                     {
-                        "type": "ImageChange",
-                        "imageChange": {}
-                     }
-                  ],
-                  "source": {
-                     "type": "Git",
-                     "git": {
-                        "uri": "${GIT_URI}",
-                        "ref": "${GIT_REF}"
-                     },
-                     "contextDir": "${CONTEXT_DIR}"
-                  },
-                  "strategy": {
-                     "type": "Source",
-                     "sourceStrategy": {
-                        "from": {
-                           "kind": "ImageStreamTag",
-                           "name": "s2i-java:latest"
+                           "name": "s2i-oasp:latest"
                         }
                      }
                   },
@@ -567,6 +329,5 @@
             }
          ]
       }
-
    ]
 }
