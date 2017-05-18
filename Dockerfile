@@ -7,8 +7,9 @@ MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 RUN yum install -y epel-release
 
 # Install build tools on top of base image
-# Java jdk 8, Maven 3.5
-RUN INSTALL_PKGS="npm git tar unzip bc which lsof java-1.8.0-openjdk java-1.8.0-openjdk-devel" && \
+
+ENV JAVA_VERSION 1.8.0
+RUN INSTALL_PKGS="npm git tar unzip bc which lsof java-$JAVA_VERSION-openjdk java-$JAVA_VERSION-openjdk-devel" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all -y && \
@@ -24,17 +25,23 @@ RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries
     ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn && \
     mkdir -p $HOME/.m2 && chmod -R a+rwX $HOME/.m2
 
+# Install the node.js etc stuff
+RUN npm install -g gulp
+RUN npm install -g bower
+
 ENV PATH=/opt/maven/bin/:$PATH
 ENV BUILDER_VERSION 1.0
 
-# TODO (optional): Copy the builder files into /opt/openshift
-# COPY ./<builder_folder>/ /opt/openshift/
-# COPY Additional files,configurations that we want to ship by default, like a default setting.xml
+# Copy the builder files
+LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
+COPY ./sti/bin/ /usr/local/sti
 COPY ./contrib/settings.xml $HOME/.m2/
 
-COPY ./sti/bin/ /usr/local/sti
-
 RUN chown -R 1001:1001 /opt/openshift
+RUN chmod -R 777 /usr/local/sti
+
+RUN ls -la /usr/local
+RUN ls -la /usr/local/sti
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001
