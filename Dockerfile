@@ -35,13 +35,10 @@ ENV BUILDER_VERSION 1.0
 # Copy the builder files
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
-COPY ./contrib/settings.xml $HOME/.m2/
+# COPY ./contrib/settings.xml $HOME/.m2/
 
 RUN chown -R 1001:1001 /opt/openshift
 RUN chmod -R 777 /usr/local/sti
-
-RUN ls -la /usr/local
-RUN ls -la /usr/local/sti
 
 # This default user is created in the openshift/base-centos7 image
 USER 1001

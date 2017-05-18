@@ -179,7 +179,21 @@
                         "from": {
                            "kind": "ImageStreamTag",
                            "name": "s2i-oasp:latest"
-                        }
+                        },
+                        "env": [
+                          {
+                            "name": "MAVEN_ARGS",
+                            "value": "clean install package -DskipTests -B"
+                          },
+                          {
+                            "name": "MAVEN_OPTS",
+                            "value": "-Xmx700m -Xms700m"
+                          },
+                          {
+                            "name": "ARTIFACT_DIR",
+                            "value": "samples/server/target"
+                          }
+                        ]
                      }
                   },
                   "output": {
