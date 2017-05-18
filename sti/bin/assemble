@@ -39,6 +39,16 @@ manage_incremental_build
 # If a pom.xml is present, this is a normal build scenario
 # so run maven.
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
+  # save the current location
+  CURRENT_DIR=`pwd`
+  # build the AngularJS parts
+  cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
+  npm install
+  cd java
+  mvn install
+  # and back to safety
+  cd $CURRENT_DIR
+
   # the subdirectory within LOCAL_SOURCE_DIR from where we should copy build
   # artifacts (*.war, *.jar)
   ARTIFACT_DIR=${ARTIFACT_DIR:-target}
