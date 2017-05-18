@@ -120,7 +120,7 @@
             {
                "description": "Git Directory",
                "name": "CONTEXT_DIR",
-               "value": "samples"
+               "value": "/"
             },
             {
                "description": "Application options. These options will be passed to the Spring Boot command line",

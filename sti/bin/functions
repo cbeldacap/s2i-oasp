@@ -57,6 +57,11 @@ function copy_artifacts() {
   done
 }
 
+function move_artifacts() {
+  echo "Copying all *-bootified.war artifacts from $LOCAL_SOURCE_DIR/$1 directory into $DEPLOY_DIR for later deployment..."
+  cp -rfv $LOCAL_SOURCE_DIR/$1/*bootified.war $DEPLOY_DIR 2> /dev/null
+}
+
 # handle incremental builds. If we have been passed build artifacts, untar
 # them over the supplied source.
 manage_incremental_build() {

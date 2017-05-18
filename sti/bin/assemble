@@ -80,7 +80,8 @@ else
   # artifacts (*.war, *.jar)
   ARTIFACT_DIR=${ARTIFACT_DIR:-.}
 
-  copy_artifacts "$ARTIFACT_DIR" jar
+  #copy_artifacts "$ARTIFACT_DIR" jar
+  move_artifacts "$ARTIFACT_DIR"
 fi
 
 # As Microservices you should only have 1 fat jar
