@@ -86,13 +86,13 @@ fi
 # As Microservices you should only have 1 fat jar
 # if compgen -G "/tmp/src/*" >/dev/null; then
 # TODO: Review how best move these
-if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.jar | wc -l) -eq 1 ]; then
-  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.jar into ${DEPLOY_DIR}/app.jar"
-  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.jar ${DEPLOY_DIR}/app.jar
-  [ ! -f ${DEPLOY_DIR}/app.jar ] && echo "Application could not be properly built." && exit 1
-  echo "[INFO] Application jar file is located in ${DEPLOY_DIR}/app.jar"
+if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.war | wc -l) -eq 1 ]; then
+  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.war into ${DEPLOY_DIR}/app.war"
+  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.war ${DEPLOY_DIR}/app.war
+  [ ! -f ${DEPLOY_DIR}/app.war ] && echo "Application could not be properly built." && exit 1
+  echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
 else
-  echo "[ERROR] No app.jar file located in ${DEPLOY_DIR}"
+  echo "[ERROR] No app.war file located in ${DEPLOY_DIR}"
   exit 1
 fi
 

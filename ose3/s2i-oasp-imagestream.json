@@ -192,6 +192,10 @@
                           {
                             "name": "ARTIFACT_DIR",
                             "value": "samples/server/target"
+                          },
+                          {
+                            "name": "APP_SUFFIX",
+                            "value": "bootified"
                           }
                         ]
                      }
