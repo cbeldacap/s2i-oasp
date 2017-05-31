@@ -43,9 +43,10 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   CURRENT_DIR=`pwd`
   # build the AngularJS parts
   cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
-  #npm install
-  cd java
-  mvn install
+  npm install
+
+  #cd java
+  #mvn install
   # and back to safety
   cd $CURRENT_DIR
 

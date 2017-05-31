@@ -1,5 +1,5 @@
 # s2i-oasp
-FROM openshift/base-centos7
+FROM centos:centos7
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 # HOME in base image is /opt/app-root/src
 
@@ -28,7 +28,7 @@ RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries
 # Install the node.js etc stuff
 RUN npm install -g gulp
 RUN npm install -g bower
-RUN chmod -R 777 /opt/app-root/src/.npm
+#RUN chmod -R 777 /opt/app-root/src/.npm
 
 ENV PATH=/opt/maven/bin/:$PATH
 ENV BUILDER_VERSION 1.0
