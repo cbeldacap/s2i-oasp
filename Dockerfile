@@ -35,6 +35,7 @@ ENV PATH=/opt/maven/bin/:$PATH
 ENV BUILDER_VERSION 1.0
 
 # Copy the builder files
+LABEL foo=bar
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
 
