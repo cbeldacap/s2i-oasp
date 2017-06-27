@@ -23,3 +23,9 @@ oc create -f ose3/s2i-oasp-imagestream.json
 oc delete bc s2i-oasp
 oc delete is s2i-oasp
 oc delete template oasp-sample-maven
+
+
+
+git clone --recursive https://github.com/mickuehl/oasp4j -b develop-2.4.0
+git config --global url."https://".insteadOf git://
+mvn install --activate-profiles=jsclient

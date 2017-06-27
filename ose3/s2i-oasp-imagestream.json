@@ -115,7 +115,7 @@
             {
                "description": "Git branch/tag reference",
                "name": "GIT_REF",
-               "value": "develop"
+               "value": "develop-2.4.0"
             },
             {
                "description": "Git Directory",

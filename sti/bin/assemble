@@ -43,7 +43,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   CURRENT_DIR=`pwd`
   # build the AngularJS parts
   cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
-  npm install
+  npm -g install
 
   #cd java
   #mvn install
@@ -56,7 +56,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
 
   pushd $LOCAL_SOURCE_DIR &> /dev/null
 
-  MAVEN_ARGS=${MAVEN_ARGS--e -Popenshift -DskipTests -Dcom.redhat.xpaas.repo.redhatga package}
+  MAVEN_ARGS=${MAVEN_ARGS--e --activate-profiles=jsclient -Popenshift -DskipTests -Dcom.redhat.xpaas.repo.redhatga package}
 
   # Always force IPv4 (CLOUD-188)
   # Append user-supplied arguments (CLOUD-412)
