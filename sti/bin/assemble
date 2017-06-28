@@ -1,8 +1,9 @@
 #!/bin/bash
-. $(dirname $0)/functions
 
 HOME=/opt/app-root/src
 MAVEN_HOME=/usr/local/maven
+
+. $(dirname $0)/functions
 
 # we will move any code provided by s2i to here
 LOCAL_SOURCE_DIR=${HOME}/source

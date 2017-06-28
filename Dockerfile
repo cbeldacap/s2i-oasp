@@ -49,6 +49,9 @@ USER 1001
 # Set the default port for applications built using this image
 EXPOSE 8080
 
+RUN npm -v
+RUN node -v
+
 # Set the default CMD for the image
 # CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/openshift/app.jar"]
 CMD ["usage"]
