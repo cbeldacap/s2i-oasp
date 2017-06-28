@@ -24,33 +24,30 @@ RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries
     mv /usr/local/apache-maven-$MAVEN_VERSION /usr/local/maven && \
     ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn
 
-COPY ./contrib/settings.xml /usr/local/maven/conf
-RUN chmod -R a+rwX /usr/local/maven/conf
+ENV MAVEN_HOME /usr/local/maven
+COPY ./contrib/settings.xml $MAVEN_HOME/conf
+RUN chmod -R a+rwX $MAVEN_HOME/conf
 
 # Install the node.js etc stuff
 RUN npm install -g gulp
 RUN npm install -g bower
 RUN mkdir -p /usr/lib/node_modules && chmod -R 777 /usr/lib/node_modules
-#RUN chmod -R 777 /opt/app-root/src/.npm
 
 ENV PATH=/opt/maven/bin/:$PATH
 ENV BUILDER_VERSION 1.0
 
 # Copy the builder files
-LABEL foo=bar
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY ./sti/bin/ /usr/local/sti
 
 RUN chown -R 1001:1001 /opt/openshift
 RUN chmod -R 777 /usr/local/sti
 
-# This default user is created in the openshift/base-centos7 image
+# This default user is created in the centos7 image
 USER 1001
 
 # Set the default port for applications built using this image
 EXPOSE 8080
-
-RUN ls -la /usr/local/maven/conf
 
 # Set the default CMD for the image
 # CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/openshift/app.jar"]
