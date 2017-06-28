@@ -22,9 +22,10 @@ ENV MAVEN_VERSION 3.5.0
 RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
     tar -zx -C /usr/local) && \
     mv /usr/local/apache-maven-$MAVEN_VERSION /usr/local/maven && \
-    ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn && \
-    mkdir -p $HOME/.m2 && chmod -R a+rwX $HOME/.m2
-COPY ./contrib/settings.xml $HOME/.m2/
+    ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn
+
+COPY ./contrib/settings.xml /usr/local/maven/conf
+RUN chmod -R a+rwX /usr/local/maven/conf
 
 # Install the node.js etc stuff
 RUN npm install -g gulp
@@ -50,7 +51,6 @@ USER 1001
 EXPOSE 8080
 
 RUN ls -la /usr/local/maven/conf
-RUN ls -la $HOME/.m2
 
 # Set the default CMD for the image
 # CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/openshift/app.jar"]
