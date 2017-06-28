@@ -31,3 +31,7 @@ git config --global url."https://".insteadOf git://
 mvn install --activate-profiles=jsclient
 
 https://blog.openshift.com/improving-build-time-java-builds-openshift/
+https://docs.openshift.com/container-platform/3.4/dev_guide/app_tutorials/maven_tutorial.html
+
+
+sed: can't read /opt/app-root/src/.m2/settings.xml: No such file or directory
