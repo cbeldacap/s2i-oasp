@@ -49,7 +49,7 @@ USER 1001
 # Set the default port for applications built using this image
 EXPOSE 8080
 
-RUN ls -la $HOME
+RUN ls -la /usr/local/maven/conf
 RUN ls -la $HOME/.m2
 
 # Set the default CMD for the image
