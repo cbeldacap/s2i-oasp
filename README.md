@@ -24,8 +24,10 @@ oc delete bc s2i-oasp
 oc delete is s2i-oasp
 oc delete template oasp-sample-maven
 
-
+# stuff
 
 git clone --recursive https://github.com/mickuehl/oasp4j -b develop-2.4.0
 git config --global url."https://".insteadOf git://
 mvn install --activate-profiles=jsclient
+
+https://blog.openshift.com/improving-build-time-java-builds-openshift/
