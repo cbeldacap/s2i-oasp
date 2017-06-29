@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
-
- <mirrors>
-   <!-- ### configured mirrors ### -->
- </mirrors>
-
- <proxies>
-   <!-- ### configured http proxy ### -->
+<settings 
+  xmlns="http://maven.apache.org/SETTINGS/1.0.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <mirrors>
+    <!-- ### configured mirrors ### -->
+  </mirrors>
+  <proxies>
+    <!-- ### configured http proxy ### -->
   </proxies>
-
   <profiles>
-
     <!-- JBoss EAP Maven repository -->
     <profile>
       <id>jboss-eap-repository</id>
@@ -87,7 +83,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <!-- JBoss EAP Maven repository (HTTP version, disabled by default) -->
     <profile>
       <id>jboss-eap-repository-insecure</id>
@@ -156,7 +151,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <!-- JBoss Community Maven repository -->
     <profile>
       <id>jboss-community-repository</id>
@@ -191,7 +185,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <!-- JBoss Community Maven repository (HTTP version, disabled by default) -->
     <profile>
       <id>jboss-community-repository-insecure</id>
@@ -220,7 +213,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <!-- Override the repository "central" from the Maven Super POM, to set HTTPS by default -->
     <profile>
       <id>securecentral</id>
@@ -243,7 +235,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
     <!-- central repositories via HTTP. Disabled by default. -->
     <profile>
       <id>insecurecentral</id>
@@ -266,7 +257,6 @@
         </pluginRepository>
       </pluginRepositories>
     </profile>
-
   </profiles>
   <activeProfiles>
     <activeProfile>securecentral</activeProfile>
