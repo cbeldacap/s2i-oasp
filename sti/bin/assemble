@@ -53,7 +53,7 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
 
   # Always force IPv4 (CLOUD-188)
   # Append user-supplied arguments (CLOUD-412)
-  MAVEN_ARGS="$MAVEN_ARGS ${PROFILE} -Djava.net.preferIPv4Stack=true ${MAVEN_ARGS_APPEND}"
+  MAVEN_ARGS="$MAVEN_GOALS $MAVEN_ARGS ${PROFILE} -Djava.net.preferIPv4Stack=true ${MAVEN_ARGS_APPEND}"
 
   echo "Found pom.xml... attempting to build with 'mvn ${MAVEN_ARGS}'"
   echo "Using $(mvn --version)"

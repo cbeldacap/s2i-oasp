@@ -112,8 +112,12 @@
                                         "value": "jsclient"
                                     },
                                     {
+                                        "name": "MAVEN_GOALS",
+                                        "value": "clean install package"
+                                    },
+                                    {
                                         "name": "MAVEN_ARGS",
-                                        "value": "clean install package -DskipTests -B"
+                                        "value": "-DskipTests -B"
                                     },
                                     {
                                         "name": "MAVEN_OPTS",
