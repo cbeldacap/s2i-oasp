@@ -66,3 +66,18 @@ clear_maven_repository() {
         rm -rf ${HOME}/.m2/repository/*
     fi
 }
+
+install_node_modules() {
+  # build the client part if available
+  if [ -n "$CLIENT_SOURCE_DIR" ]; then
+    # save the current location
+    CURRENT_DIR=`pwd`
+    
+    # build the AngularJS parts
+    cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
+    npm -g install --no-optional
+
+    # and back to safety
+    cd $CURRENT_DIR
+  fi
+}

@@ -38,19 +38,7 @@ configure_mirrors
 # If a pom.xml is present, this is a normal build scenario so run maven.
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
 
-  # build the client part if available
-  if [ -n "$CLIENT_SOURCE_DIR" ]; then
-    # save the current location
-    CURRENT_DIR=`pwd`
-    # build the AngularJS parts
-    cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
-    npm -g install --no-optional
-
-    #cd java
-    #mvn install
-    # and back to safety
-    cd $CURRENT_DIR
-  fi
+  install_node_modules
 
   # the subdirectory within LOCAL_SOURCE_DIR from where we should copy build
   # artifacts (*.war, *.jar)
