@@ -71,7 +71,7 @@ install_node_modules() {
   # build the client part if available
   if [ -n "$CLIENT_SOURCE_DIR" ]; then
 
-    echo "Installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR'"
+    echo "Installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR' ..."
 
     # save the current location
     CURRENT_DIR=`pwd`
@@ -82,5 +82,7 @@ install_node_modules() {
 
     # and back to safety
     cd $CURRENT_DIR
+  else
+    echo "Skip installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR' ..."
   fi
 }
