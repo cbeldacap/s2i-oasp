@@ -38,8 +38,7 @@ configure_mirrors
 
 manage_incremental_build
 
-# If a pom.xml is present, this is a normal build scenario
-# so run maven.
+# If a pom.xml is present, this is a normal build scenario so run maven.
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   # save the current location
   CURRENT_DIR=`pwd`
@@ -58,12 +57,16 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
 
   pushd $LOCAL_SOURCE_DIR &> /dev/null
 
+  PROFILE=""
+  if [ -n "$MAVEN_PROFILE" ]; then
+    PROFILE="--activate-profiles=${MAVEN_PROFILE}"
+  fi
+
   # Always force IPv4 (CLOUD-188)
   # Append user-supplied arguments (CLOUD-412)
-  MAVEN_ARGS="$MAVEN_ARGS -Djava.net.preferIPv4Stack=true ${MAVEN_ARGS_APPEND}"
+  MAVEN_ARGS="$MAVEN_ARGS ${PROFILE} -Djava.net.preferIPv4Stack=true ${MAVEN_ARGS_APPEND}"
 
   echo "Found pom.xml... attempting to build with 'mvn ${MAVEN_ARGS}'"
-
   echo "Using $(mvn --version)"
 
   # Execute the actual build
