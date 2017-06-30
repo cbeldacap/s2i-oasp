@@ -6,8 +6,8 @@ Source-2-Image stream for 'The Open Application Standard Platform for Java', [oa
 
 ### builder
 
-oc create -f ocp/s2i-oasp-imagestream.json
-oc create -f ocp/oasp4j-sample-template.json
+oc create -f openshift/images/s2i-oasp-imagestream.json
+oc create -f openshift/templates/oasp4j-sample-template.json
 
 ### cleanup
 
@@ -30,6 +30,8 @@ MAVEN_ARGS clean install package -DskipTests -B
 MAVEN_OPTS -Xmx700m -Xms700m
 MAVEN_MIRROR_URL http://nexus-cicd.192.168.42.81.nip.io/nexus/content/groups/public
 MAVEN_ARGS_APPEND
+
+NPM_PROXY_URL
 
 ARTIFACT_DIR samples/server/target
 APP_SUFFIX bootified

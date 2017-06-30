@@ -121,19 +121,15 @@
                                     },
                                     {
                                         "name": "MAVEN_OPTS",
-                                        "value": "-Xmx700m -Xms700m"
-                                    },
-                                    {
-                                        "name": "MAVEN_MIRROR_URL",
-                                        "value": ""
-                                    },
-                                    {
-                                        "name": "ARTIFACT_DIR",
-                                        "value": "samples/server/target"
+                                        "value": "-Xmx1024m -Xms1024m"
                                     },
                                     {
                                         "name": "APP_SUFFIX",
                                         "value": "bootified"
+                                    },
+                                    {
+                                        "name": "ARTIFACT_DIR",
+                                        "value": "samples/server/target"
                                     },
                                     {
                                         "name": "CLIENT_SOURCE_DIR",

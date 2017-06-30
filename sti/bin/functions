@@ -71,18 +71,25 @@ install_node_modules() {
   # build the client part if available
   if [ -n "$CLIENT_SOURCE_DIR" ]; then
 
-    echo "Installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR' ..."
+    PROXY_SETTINGS=""
+    if [ -n "$NPM_PROXY_URL" ]; then
+      PROXY_SETTINGS="--proxy ${NPM_PROXY_URL} --https-proxy ${NPM_PROXY_URL} --strict-ssl false"
+    fi
+
+    NPM_ARGS="${PROXY_SETTINGS} -g install --no-optional"
+    echo "Installing node modules ..."
+    echo "npm ${NPM_ARGS}"
 
     # save the current location
     CURRENT_DIR=`pwd`
     
     # build the AngularJS parts
     cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
-    npm -g install --no-optional
+    npm $NPM_ARGS
 
     # and back to safety
     cd $CURRENT_DIR
   else
-    echo "Skip installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR' ..."
+    echo "Skip installing node modules ..."
   fi
 }
