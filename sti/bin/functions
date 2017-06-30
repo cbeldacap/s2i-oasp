@@ -70,6 +70,9 @@ clear_maven_repository() {
 install_node_modules() {
   # build the client part if available
   if [ -n "$CLIENT_SOURCE_DIR" ]; then
+
+    echo "Installing node modules in '$LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR'"
+
     # save the current location
     CURRENT_DIR=`pwd`
     
