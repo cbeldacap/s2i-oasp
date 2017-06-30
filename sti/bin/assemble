@@ -8,7 +8,6 @@ MAVEN_HOME=/usr/local/maven
 # we will move any code provided by s2i to here
 LOCAL_SOURCE_DIR=${HOME}/source
 mkdir -p $LOCAL_SOURCE_DIR
-# TODO: Verify a $HOME is set
 
 # Resulting artifact files will be deployed to /opt/openshift
 DEPLOY_DIR=/opt/openshift
@@ -20,7 +19,7 @@ if compgen -G "/tmp/src/*" >/dev/null; then
   cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
 fi
 
-
+# src provides its own mvn configuration
 if [ -d $LOCAL_SOURCE_DIR/configuration ]; then
   echo "Copying config files from project..."
 
@@ -36,20 +35,22 @@ fi
 configure_proxy
 configure_mirrors
 
-manage_incremental_build
-
 # If a pom.xml is present, this is a normal build scenario so run maven.
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
-  # save the current location
-  CURRENT_DIR=`pwd`
-  # build the AngularJS parts
-  cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
-  npm -g install --no-optional
 
-  #cd java
-  #mvn install
-  # and back to safety
-  cd $CURRENT_DIR
+  # build the client part if available
+  if [ -n "$CLIENT_SOURCE_DIR" ]; then
+    # save the current location
+    CURRENT_DIR=`pwd`
+    # build the AngularJS parts
+    cd $LOCAL_SOURCE_DIR/$CLIENT_SOURCE_DIR
+    npm -g install --no-optional
+
+    #cd java
+    #mvn install
+    # and back to safety
+    cd $CURRENT_DIR
+  fi
 
   # the subdirectory within LOCAL_SOURCE_DIR from where we should copy build
   # artifacts (*.war, *.jar)

@@ -14,6 +14,8 @@ oc create -f ocp/oasp4j-sample-template.json
 oc delete bc s2i-oasp
 oc delete is s2i-oasp
 
+oc delete template oasp4j-sample-maven
+
 ### build parameters
 
 HTTP_PROXY_HOST
@@ -31,3 +33,13 @@ MAVEN_ARGS_APPEND
 ARTIFACT_DIR samples/server/target
 APP_SUFFIX bootified
 CLIENT_SOURCE_DIR samples/server/src/main/client
+
+
+
+oc delete bc oasp4j-sample
+oc delete dc oasp4j-sample
+oc delete route oasp4j-sample
+oc delete service oasp4j-sample
+oc delete is oasp4j-sample
+
+oc delete template oasp4j-sample-maven
