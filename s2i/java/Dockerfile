@@ -50,7 +50,7 @@ ENV BUILDER_VERSION 1.0
 
 # Copy the builder files
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
-COPY ./bin/ /usr/local/sti
+COPY s2i/java/bin/ /usr/local/sti
 
 RUN chown -R 1001:1001 /opt/openshift
 RUN chmod -R 777 /usr/local/sti
