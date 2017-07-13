@@ -9,16 +9,16 @@
             "kind": "Template",
             "apiVersion": "v1",
             "metadata": {
-                "name": "oasp4j-mythaistar-server-sample",
+                "name": "oasp-mythaistar-server-sample",
                 "annotations": {
                     "description": "My Thai Star sample application (Server)",
                     "iconClass": "icon-java",
-                    "tags": "instant-app,oasp4j,springboot,maven,java"
+                    "tags": "instant-app,oasp,springboot,maven,java"
                 }
             },
             "labels": {
                 "application": "mythaistar-server",
-                "createdBy": "oasp4j-mythaistar-server-template"
+                "createdBy": "oasp-mythaistar-server-template"
             },
             "parameters": [
                 {
@@ -104,7 +104,7 @@
                             "sourceStrategy": {
                                 "from": {
                                     "kind": "ImageStreamTag",
-                                    "name": "s2i-oasp:latest"
+                                    "name": "s2i-oasp-java:latest"
                                 },
                                 "env": [
                                     {
