@@ -17,8 +17,6 @@ RUN INSTALL_PKGS="git curl tar unzip bc which lsof" && \
 # Install JavaScript/npm/node & build tools
 #
 RUN yum install -y npm
-RUN npm install -g gulp
-RUN npm install -g bower
 RUN npm install -g yarn
 
 # Location of the node modules
@@ -40,7 +38,7 @@ ENV BUILDER_VERSION 1.0
 
 # Copy the builder files
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
-COPY ./sti/bin/ /usr/local/sti
+COPY s2i/angular/bin/ /usr/local/sti
 
 RUN chown -R 1001:1001 /opt/openshift
 RUN chmod -R 777 /usr/local/sti
