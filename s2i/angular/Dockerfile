@@ -46,7 +46,7 @@ RUN chmod -R 777 /usr/local/sti
 USER 1001
 
 # Set the default port for applications built using this image
-EXPOSE 8080
+EXPOSE 80
 
 # Set the default CMD for the image
 CMD ["usage"]
