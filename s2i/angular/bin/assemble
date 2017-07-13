@@ -21,11 +21,14 @@ pushd $LOCAL_SOURCE_DIR &> /dev/null
 
 cd $LOCAL_SOURCE_DIR
 
+# FIXME See https://github.com/angular/angular-cli/issues/4736
+cp .angular-cli.json angular-cli.json
+
 npm install
 yarn build:prod
 
-pwd
 ls -la
+ls -la dist
 
 popd &> /dev/null
 
