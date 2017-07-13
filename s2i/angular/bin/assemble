@@ -1,0 +1,32 @@
+#!/bin/bash
+
+HOME=/opt/app-root/src
+
+. $(dirname $0)/functions
+
+# we will move any code provided by s2i to here
+LOCAL_SOURCE_DIR=${HOME}/source
+mkdir -p $LOCAL_SOURCE_DIR
+
+# Resulting artifact files will be deployed to /opt/openshift
+DEPLOY_DIR=/opt/openshift
+
+# Copy the source for compilation
+if compgen -G "/tmp/src/*" >/dev/null; then
+  mkdir -p $LOCAL_SOURCE_DIR
+  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+fi
+
+pushd $LOCAL_SOURCE_DIR &> /dev/null
+
+cd $LOCAL_SOURCE_DIR
+
+npm install
+yarn build:prod
+
+pwd
+ls -la
+
+popd &> /dev/null
+
+exit 0

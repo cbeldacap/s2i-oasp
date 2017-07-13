@@ -1,4 +1,4 @@
-# s2i-oasp
+# s2i-oasp-angular
 FROM centos:centos7
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 
@@ -12,27 +12,6 @@ RUN INSTALL_PKGS="git curl tar unzip bc which lsof" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS
 
-#
-# Install the JDK
-#
-ENV JAVA_VERSION 1.8.0
-RUN INSTALL_PKGS="java-$JAVA_VERSION-openjdk java-$JAVA_VERSION-openjdk-devel" && \
-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
-    rpm -V $INSTALL_PKGS
-
-#
-# Install Maven
-#
-ENV MAVEN_VERSION 3.5.0
-RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries/apache-maven-$MAVEN_VERSION-bin.tar.gz | \
-    tar -zx -C /usr/local) && \
-    mv /usr/local/apache-maven-$MAVEN_VERSION /usr/local/maven && \
-    ln -sf /usr/local/maven/bin/mvn /usr/local/bin/mvn
-
-# Add a default mvn settings.xml file
-ENV MAVEN_HOME /usr/local/maven
-COPY ./contrib/settings.xml $MAVEN_HOME/conf
-RUN chmod -R a+rwX $MAVEN_HOME/conf
 
 #
 # Install JavaScript/npm/node & build tools
