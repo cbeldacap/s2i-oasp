@@ -40,6 +40,7 @@ RUN chmod -R a+rwX $MAVEN_HOME/conf
 RUN yum install -y npm
 RUN npm install -g gulp
 RUN npm install -g bower
+RUN npm install -g yarn
 
 # Location of the node modules
 RUN mkdir -p /usr/lib/node_modules && chmod -R 777 /usr/lib/node_modules
@@ -72,5 +73,4 @@ USER 1001
 EXPOSE 8080
 
 # Set the default CMD for the image
-# CMD ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/opt/openshift/app.jar"]
 CMD ["usage"]
