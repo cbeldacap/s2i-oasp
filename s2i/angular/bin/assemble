@@ -24,11 +24,11 @@ cd $LOCAL_SOURCE_DIR
 ls -la
 
 
-npm install
+#npm install
 
-ls -la
+#ls -la
 # FIXME See https://github.com/angular/angular-cli/issues/4736
-cp .angular-cli.json angular-cli.json
+#cp .angular-cli.json angular-cli.json
 
 yarn build:prod
 
