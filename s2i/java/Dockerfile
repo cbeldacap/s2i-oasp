@@ -31,7 +31,7 @@ RUN (curl -0 http://www.eu.apache.org/dist/maven/maven-3/$MAVEN_VERSION/binaries
 
 # Add a default mvn settings.xml file
 ENV MAVEN_HOME /usr/local/maven
-COPY ../../contrib/settings.xml $MAVEN_HOME/conf
+COPY ./contrib/settings.xml $MAVEN_HOME/conf
 RUN chmod -R a+rwX $MAVEN_HOME/conf
 
 # Done with installations, clean-up now
