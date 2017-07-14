@@ -6,7 +6,6 @@ HOME=/opt/app-root/src
 
 # we will move any code provided by s2i to here
 LOCAL_SOURCE_DIR=${HOME}/source
-mkdir -p $LOCAL_SOURCE_DIR
 
 # Resulting artifact files will be deployed to /opt/openshift
 DEPLOY_DIR=/opt/openshift
@@ -15,6 +14,7 @@ DEPLOY_DIR=/opt/openshift
 if compgen -G "/tmp/src/*" >/dev/null; then
   mkdir -p $LOCAL_SOURCE_DIR
   cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
 fi
 
 pushd $LOCAL_SOURCE_DIR &> /dev/null

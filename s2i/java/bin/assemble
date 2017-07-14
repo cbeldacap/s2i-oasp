@@ -13,10 +13,10 @@ mkdir -p $LOCAL_SOURCE_DIR
 DEPLOY_DIR=/opt/openshift
 
 # Copy the source for compilation
-# TODO: Remove. Why do we need to move the source???
 if compgen -G "/tmp/src/*" >/dev/null; then
   mkdir -p $LOCAL_SOURCE_DIR
   cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
 fi
 
 # src provides its own mvn configuration
