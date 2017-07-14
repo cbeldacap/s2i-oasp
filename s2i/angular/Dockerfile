@@ -5,10 +5,13 @@ MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 # Gain access to EPEL (Extra Packages for Enterprise Linux)
 RUN yum install -y epel-release
 
+# Install development tools
+RUN yum group install -y "Development Tools"
+
 #
 # Install basic tools on top of base image
 #
-RUN INSTALL_PKGS="git curl tar unzip bc which lsof make" && \
+RUN INSTALL_PKGS="curl tar unzip bc which lsof" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS
 
