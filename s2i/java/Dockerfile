@@ -8,7 +8,7 @@ RUN yum install -y epel-release
 #
 # Install basic tools on top of base image
 #
-RUN INSTALL_PKGS="git curl tar unzip bc which lsof" && \
+RUN INSTALL_PKGS="git curl tar unzip bc which lsof make" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS
 
