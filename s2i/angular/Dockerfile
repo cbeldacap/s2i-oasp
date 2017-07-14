@@ -6,19 +6,16 @@ MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 RUN yum install -y epel-release
 
 # Install development tools
-RUN yum group install "Development Tools"
+RUN INSTALL_DEV_PKGS="autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign" && \
+    yum install -y --enablerepo=centosplus $INSTALL_DEV_PKGS && \
+    rpm -V $INSTALL_DEV_PKGS
 
-#
 # Install basic tools on top of base image
-#
 RUN INSTALL_PKGS="curl tar unzip bc which lsof" && \
     yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS
 
-
-#
 # Install JavaScript/npm/node & build tools
-#
 RUN yum install -y npm
 RUN npm install -g yarn
 
