@@ -6,7 +6,7 @@ MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 RUN yum install -y epel-release
 
 # Install development tools
-RUN yum group install -y "Development Tools"
+RUN yum group install "Development Tools"
 
 #
 # Install basic tools on top of base image
