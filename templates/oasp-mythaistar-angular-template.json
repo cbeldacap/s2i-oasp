@@ -12,7 +12,7 @@
                 "name": "oasp-mythaistar-angular-sample",
                 "annotations": {
                     "description": "My Thai Star sample application (client/angular)",
-                    "iconClass": "icon-javas",
+                    "iconClass": "icon-nodejs",
                     "tags": "instant-app,oasp,javascript,angular"
                 }
             },

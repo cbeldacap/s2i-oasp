@@ -9,22 +9,22 @@
             "kind": "Template",
             "apiVersion": "v1",
             "metadata": {
-                "name": "oasp-mythaistar-server-sample",
+                "name": "oasp-mythaistar-java-sample",
                 "annotations": {
-                    "description": "My Thai Star sample application (Server)",
+                    "description": "My Thai Star sample application (server)",
                     "iconClass": "icon-java",
                     "tags": "instant-app,oasp,springboot,maven,java"
                 }
             },
             "labels": {
-                "application": "mythaistar-server",
+                "application": "mythaistar-java",
                 "createdBy": "oasp-mythaistar-server-template"
             },
             "parameters": [
                 {
                     "description": "The name for the application.",
                     "name": "APPLICATION_NAME",
-                    "value": "mythaistar-server",
+                    "value": "mythaistar-java",
                     "displayName": "Application name",
                     "required": true
                 },
