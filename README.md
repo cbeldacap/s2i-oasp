@@ -1,50 +1,30 @@
 # s2i-oasp
 
-Source-2-Image stream for 'The Open Application Standard Platform for Java', [oasp4j](https://github.com/oasp/oasp4j).
+This repository contains the source for building various versions of the [reference application for OASP](https://github.com/oasp/my-thai-star) as a reproducible build using [Source-to-Image](https://github.com/openshift/source-to-image)(S2I).
 
 ## Usage
 
-### builder
+### Deploy the builder images
 
-oc create -f openshift/images/s2i-oasp-imagestream.json
+#### Java
 
-oc create -f openshift/templates/oasp4j-sample-template.json
-oc create -f openshift/templates/npm-proxy-cache-build.json
+To build the server-side developed using the 2.4 version of oasp4j.
 
-### cleanup
+The builder image
 
-oc delete bc s2i-oasp
-oc delete is s2i-oasp
+    oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/java/s2i-oasp-java-imagestream.json
 
-oc delete template oasp4j-sample-maven
+The application template
 
-### build parameters
+    oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/templates/oasp-mythaistar-java-template.json
 
-HTTP_PROXY_HOST
-HTTP_PROXY_PORT
-HTTP_PROXY_USERNAME
-HTTP_PROXY_PASSWORD
-HTTP_PROXY_NONPROXYHOSTS
+#### Environment variables
 
-MAVEN_GOALS install
-MAVEN_PROFILE jsclient
-MAVEN_ARGS clean install package -DskipTests -B
-MAVEN_OPTS -Xmx700m -Xms700m
-MAVEN_MIRROR_URL http://nexus-cicd.192.168.42.81.nip.io/nexus/content/groups/public
-MAVEN_ARGS_APPEND
+Application developers can use the following environment variables to configure the runtime behavior of the build process:
 
-NPM_PROXY_URL
+NAME        | Description
+------------|-------------
+CONTEXT_DIR | The directory with in the git repo that contains the source code to build
+APP_OPTIONS | Application options. These options will be passed to the Spring Boot command line
+ARTIFACT_DIR | The location of the deployable artifacts, rel. to APP_OPTIONS
 
-ARTIFACT_DIR samples/server/target
-APP_SUFFIX bootified
-CLIENT_SOURCE_DIR samples/server/src/main/client
-
-
-
-oc delete bc oasp4j-sample
-oc delete dc oasp4j-sample
-oc delete route oasp4j-sample
-oc delete service oasp4j-sample
-oc delete is oasp4j-sample
-
-oc delete template oasp4j-sample-maven
