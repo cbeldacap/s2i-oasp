@@ -22,6 +22,7 @@ pushd $LOCAL_SOURCE_DIR &> /dev/null
 cd $LOCAL_SOURCE_DIR
 
 yarn upgrade
+npm rebuild node-sass --force
 yarn build:prod
 
 popd &> /dev/null
