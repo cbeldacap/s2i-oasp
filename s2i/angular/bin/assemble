@@ -5,18 +5,23 @@ set -e
 echo "---> Building sources ..."
 cd /tmp/src
 export npm_config_tmp=/tmp
-yarn upgrade
-npm rebuild node-sass --force
-yarn build:prod
+#yarn upgrade
+#npm rebuild node-sass --force
+#yarn build:prod
 
 echo "---> Moving sources ..."
 cd
 #cp -ad /tmp/src/dist/* .
 #cp -ad /tmp/src/dist/.* .
 
+echo "1--->"
 ls -la
+
 echo "2--->"
-ls -la ./nginx-cfg
+ls -la /usr/share/nginx
+
+echo "3--->"
+ls -la /etc/nginx/
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files ..."
