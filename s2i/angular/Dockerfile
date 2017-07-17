@@ -45,11 +45,8 @@ RUN yum install -y yum-utils gettext hostname && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
-COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
-
-# Copy extra files to the image.
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
-COPY s2i/angular/root/ /
+COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
 
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
@@ -57,6 +54,7 @@ COPY s2i/angular/root/ /
 RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.conf && \
     mkdir -p /opt/app-root/etc/nginx.d/ && \
     mkdir -p /opt/app-root/etc/nginx.default.d/ && \
+    mkdir -p /opt/app-root/html && \
     mkdir -p /usr/lib/node_modules && \
     mkdir -p /.cache && \
     mkdir -p /.config && \
@@ -65,11 +63,16 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     chmod -R a+rwX /usr/lib/node_modules && \
     chmod -R a+rwX /.cache && \
     chmod -R a+rwX /.config && \
+    chmod -R a+rwX /opt/app-root/html && \
     chown -R 1001:0 /opt/app-root && \
     chown -R 1001:0 /var/opt/rh/rh-nginx110 && \
     chown -R 1001:0 /usr/lib/node_modules && \
     chown -R 1001:0 /.cache && \
-    chown -R 1001:0 /.config
+    chown -R 1001:0 /.config && \
+    chown -R 1001:0 /opt/app-root/html
+
+# Copy extra files to the image.
+COPY s2i/angular/root/ /
 
 # Install Javascript stuff
 RUN npm install -g yarn

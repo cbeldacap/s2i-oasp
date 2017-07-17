@@ -14,7 +14,8 @@ cd
 #cp -ad /tmp/src/dist/* .
 #cp -ad /tmp/src/dist/.* .
 
-
+echo "3--->"
+ls -la /opt
 
 echo "4--->"
 ls -la /opt/app-root/etc/nginx.d
