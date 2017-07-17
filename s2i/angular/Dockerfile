@@ -62,7 +62,7 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     chmod -R a+rwx /opt/app-root/etc && \
     chmod -R a+rwx /var/opt/rh/rh-nginx110 && \
     chmod -R a+rwX /usr/lib/node_modules && \
-    chmod -R a+rwX /opt/app-root/src &6 \
+    chmod -R a+rwX /opt/app-root/src && \
     chown -R 1001:0 /opt/app-root && \
     chown -R 1001:0 /var/opt/rh/rh-nginx110 && \
     chown -R 1001:0 /usr/lib/node_modules && \
