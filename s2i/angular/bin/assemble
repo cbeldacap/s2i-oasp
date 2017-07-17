@@ -14,8 +14,13 @@ cd
 #cp -ad /tmp/src/dist/* .
 #cp -ad /tmp/src/dist/.* .
 
+
+
 echo "4--->"
-cat /opt/app-root/etc/nginx.d/default.conf
+ls -la /opt/app-root/etc/nginx.d
+
+echo "5--->"
+ls -la /opt/app-root/etc/nginx.default.d
 
 
 if [ -d ./nginx-cfg ]; then
