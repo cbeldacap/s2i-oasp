@@ -14,14 +14,14 @@ cd
 #cp -ad /tmp/src/dist/* .
 #cp -ad /tmp/src/dist/.* .
 
-echo "3--->"
-ls -la /opt
+echo "4--->"
+ls -la /opt/app-root/html
 
 echo "4--->"
 ls -la /opt/app-root/etc/nginx.d
 
 echo "5--->"
-ls -la /opt/app-root/etc/nginx.default.d
+ls -la /opt/rh/rh-nginx110/root/usr/share/nginx/html
 
 
 if [ -d ./nginx-cfg ]; then
