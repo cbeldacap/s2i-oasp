@@ -2,6 +2,12 @@
 
 set -e
 
+echo "--->"
+pwd
+ls -la
+echo "--->"
+ls -la /tmp/src
+
 echo "---> Installing application source"
 cp -Rf /tmp/src/. ./
 
