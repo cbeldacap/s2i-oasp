@@ -4,6 +4,7 @@ set -e
 
 echo "---> Building sources ..."
 cd /tmp/src
+export npm_config_tmp=/tmp
 yarn upgrade
 npm rebuild node-sass --force
 yarn build:prod
