@@ -9,12 +9,6 @@ yarn upgrade
 npm rebuild node-sass --force
 yarn build:prod
 
-echo "1--->"
-ls -la /tmp/src
-
-echo "2--->"
-ls -la /tmp/src/dist
-
 cd
 
 if [ -d ./nginx-cfg ]; then
@@ -32,6 +26,3 @@ if [ -d ./nginx-default-cfg ]; then
     rm -rf ./nginx-default-cfg
   fi
 fi
-
-# Fix source directory permissions
-fix-permissions ./
