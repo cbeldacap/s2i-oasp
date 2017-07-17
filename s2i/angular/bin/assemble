@@ -10,6 +10,8 @@ npm rebuild node-sass --force
 yarn build:prod
 
 cd
+echo "1-->"
+ls -la
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files ..."
