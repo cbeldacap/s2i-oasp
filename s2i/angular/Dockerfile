@@ -48,6 +48,7 @@ RUN yum install -y yum-utils gettext hostname && \
 COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
 
 # Copy extra files to the image.
+LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY s2i/angular/root/ /
 
 # In order to drop the root user, we have to make some directories world
