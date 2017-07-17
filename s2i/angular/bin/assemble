@@ -1,30 +1,25 @@
 #!/bin/bash
 
-HOME=/opt/app-root/src
+set -e
 
-. $(dirname $0)/functions
+echo "---> Installing application source"
+cp -Rf /tmp/src/. ./
 
-# we will move any code provided by s2i to here
-LOCAL_SOURCE_DIR=${HOME}/source
-
-# Resulting artifact files will be deployed to /opt/openshift
-DEPLOY_DIR=/opt/openshift
-
-# Copy the source for compilation
-if compgen -G "/tmp/src/*" >/dev/null; then
-  mkdir -p $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
+if [ -d ./nginx-cfg ]; then
+  echo "---> Copying nginx configuration files..."
+  if [ "$(ls -A ./nginx-cfg/*.conf)" ]; then
+    cp -v ./nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
+    rm -rf ./nginx-cfg
+  fi
 fi
 
-pushd $LOCAL_SOURCE_DIR &> /dev/null
+if [ -d ./nginx-default-cfg ]; then
+  echo "---> Copying nginx default server configuration files..."
+  if [ "$(ls -A ./nginx-default-cfg/*.conf)" ]; then
+    cp -v ./nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
+    rm -rf ./nginx-default-cfg
+  fi
+fi
 
-cd $LOCAL_SOURCE_DIR
-
-yarn upgrade
-npm rebuild node-sass --force
-yarn build:prod
-
-popd &> /dev/null
-
-exit 0
+# Fix source directory permissions
+fix-permissions ./
