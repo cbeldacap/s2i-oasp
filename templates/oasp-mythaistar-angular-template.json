@@ -229,7 +229,7 @@
                             {
                                 "name": "${APPLICATION_NAME}-http",
                                 "port": 8091,
-                                "targetPort": 80
+                                "targetPort": 8080
                             }
                         ],
                         "selector": {

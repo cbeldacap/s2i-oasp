@@ -18,10 +18,10 @@ echo "1--->"
 ls -la
 
 echo "2--->"
-ls -la /etc
+ls -la /opt/app-root
 
 echo "3--->"
-ls -la /usr/share
+ls -la /opt/app-root/etc
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files ..."
