@@ -39,7 +39,7 @@ RUN yum install -y yum-utils gettext hostname && \
     yum install -y centos-release-scl-rh epel-release && \
     yum-config-manager --enable centos-sclo-rh-testing && \
     INSTALL_PKGS="nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx" && \
-    INSTALL_DEV_PKGS="npm autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign" && \
+    INSTALL_DEV_PKGS="npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS $INSTALL_DEV_PKGS && \
     rpm -V $INSTALL_PKGS $INSTALL_DEV_PKGS && \
     yum clean all
