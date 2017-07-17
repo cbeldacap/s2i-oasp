@@ -2,28 +2,22 @@
 
 set -e
 
-echo "--->"
-pwd
-ls -la
-echo "--->"
+echo "---> Building sources ..."
+cd /tmp/src
+yarn upgrade
+npm rebuild node-sass --force
+yarn build:prod
+
+echo "1--->"
 ls -la /tmp/src
 
-# we will move any code provided by s2i to here
-LOCAL_SOURCE_DIR=/opt/app-root/src
-echo "--->"
-ls -la $LOCAL_SOURCE_DIR
+echo "2--->"
+ls -la /tmp/src/dist
 
-echo "---> Installing application source"
-if compgen -G "/tmp/src/*" >/dev/null; then
-  mkdir -p $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
-fi
-echo "--->"
-ls -la $LOCAL_SOURCE_DIR
+cd
 
 if [ -d ./nginx-cfg ]; then
-  echo "---> Copying nginx configuration files..."
+  echo "---> Copying nginx configuration files ..."
   if [ "$(ls -A ./nginx-cfg/*.conf)" ]; then
     cp -v ./nginx-cfg/*.conf "${NGINX_CONFIGURATION_PATH}"
     rm -rf ./nginx-cfg
@@ -31,7 +25,7 @@ if [ -d ./nginx-cfg ]; then
 fi
 
 if [ -d ./nginx-default-cfg ]; then
-  echo "---> Copying nginx default server configuration files..."
+  echo "---> Copying nginx default server configuration files ..."
   if [ "$(ls -A ./nginx-default-cfg/*.conf)" ]; then
     cp -v ./nginx-default-cfg/*.conf "${NGINX_DEFAULT_CONF_PATH}"
     rm -rf ./nginx-default-cfg
