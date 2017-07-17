@@ -3,13 +3,25 @@
 set -e
 
 echo "--->"
+whoami
 pwd
 ls -la
 echo "--->"
 ls -la /tmp/src
 
+# we will move any code provided by s2i to here
+LOCAL_SOURCE_DIR=/opt/app-root/src
+echo "--->"
+ls -la $LOCAL_SOURCE_DIR
+
 echo "---> Installing application source"
-cp -Rf /tmp/src/. ./
+if compgen -G "/tmp/src/*" >/dev/null; then
+  mkdir -p $LOCAL_SOURCE_DIR
+  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
+fi
+echo "--->"
+ls -la $LOCAL_SOURCE_DIR
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files..."
