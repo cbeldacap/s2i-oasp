@@ -3,7 +3,6 @@
 set -e
 
 echo "--->"
-whoami
 pwd
 ls -la
 echo "--->"
