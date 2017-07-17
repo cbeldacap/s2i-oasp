@@ -60,16 +60,19 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     mkdir -p /usr/lib/node_modules && \
     mkdir -p /opt/app-root/src && \
     mkdir -p /.cache && \
+    mkdir -p /.config && \
     chmod -R a+rwx /opt/app-root/etc && \
     chmod -R a+rwx /var/opt/rh/rh-nginx110 && \
     chmod -R a+rwX /usr/lib/node_modules && \
     chmod -R a+rwX /opt/app-root/src && \
     chmod -R a+rwX /.cache && \
+    chmod -R a+rwX /.config && \
     chown -R 1001:0 /opt/app-root && \
     chown -R 1001:0 /var/opt/rh/rh-nginx110 && \
     chown -R 1001:0 /usr/lib/node_modules && \
     chown -R 1001:0 /opt/app-root/src && \
-    chown -R 1001:0 /.cache
+    chown -R 1001:0 /.cache && \
+    chown -R 1001:0 /.config
 
 # Install Javascript stuff
 RUN npm install -g yarn
