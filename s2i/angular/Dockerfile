@@ -37,14 +37,14 @@ RUN yum install -y yum-utils gettext hostname && \
     INSTALL_PKGS="nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx" && \
     INSTALL_DEV_PKGS="npm autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign" && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS $INSTALL_DEV_PKGS && \
-    rpm -V $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS $INSTALL_DEV_PKGS && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
 COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
 
 # Copy extra files to the image.
-COPY ./root/ /
+COPY s2i/angular/root/ /
 
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
