@@ -31,6 +31,10 @@ LABEL summary="$SUMMARY" \
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 
+# Gain access to EPEL (Extra Packages for Enterprise Linux)
+RUN yum install -y epel-release
+
+# Install extra packages
 RUN yum install -y yum-utils gettext hostname && \
     yum install -y centos-release-scl-rh epel-release && \
     yum-config-manager --enable centos-sclo-rh-testing && \
