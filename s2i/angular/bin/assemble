@@ -18,10 +18,10 @@ echo "1--->"
 ls -la
 
 echo "2--->"
-ls -la /etc/nginx
+ls -la /etc
 
 echo "3--->"
-ls -la /etc/nginx/
+ls -la /usr/share
 
 if [ -d ./nginx-cfg ]; then
   echo "---> Copying nginx configuration files ..."
