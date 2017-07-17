@@ -64,11 +64,12 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     chown -R 1001:0 /var/opt/rh/rh-nginx110 && \
     chown -R 1001:0 /usr/lib/node_modules
 
+# Install Javascript stuff
+RUN npm install -g yarn
+
 # The default user in the centos image
 USER 1001
 
-# Install Javascript stuff
-RUN npm install -g yarn
 
 VOLUME ["/opt/rh/rh-nginx110/root/usr/share/nginx/html"]
 VOLUME ["/var/opt/rh/rh-nginx110/log/nginx/"]
