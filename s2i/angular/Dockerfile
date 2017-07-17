@@ -48,6 +48,9 @@ RUN yum install -y yum-utils gettext hostname && \
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
 
+# Copy extra files to the image.
+COPY s2i/angular/root/ /
+
 # In order to drop the root user, we have to make some directories world
 # writeable as OpenShift default security model is to run the container under
 # random UID.
@@ -70,9 +73,6 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     chown -R 1001:0 /.cache && \
     chown -R 1001:0 /.config && \
     chown -R 1001:0 /opt/app-root/html
-
-# Copy extra files to the image.
-COPY s2i/angular/root/ /
 
 # Install Javascript stuff
 RUN npm install -g yarn
