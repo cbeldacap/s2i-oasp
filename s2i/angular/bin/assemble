@@ -15,10 +15,7 @@ cd
 #cp -ad /tmp/src/dist/.* .
 
 echo "4--->"
-ls -la /opt/app-root/html
-
-echo "4--->"
-ls -la /opt/app-root/etc/nginx.d
+ls -la /opt/rh/rh-nginx110/root/usr/share/nginx
 
 echo "5--->"
 ls -la /opt/rh/rh-nginx110/root/usr/share/nginx/html
