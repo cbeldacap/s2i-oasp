@@ -185,7 +185,7 @@
                                         "image": "${APPLICATION_NAME}",
                                         "ports": [
                                             {
-                                                "containerPort": 80,
+                                                "containerPort": 8080,
                                                 "protocol": "TCP"
                                             }
                                         ],

@@ -9,8 +9,11 @@ yarn upgrade
 npm rebuild node-sass --force
 yarn build:prod
 
+echo "---> Moving sources ..."
 cd
-echo "1-->"
+cp -ad /tmp/src/dist/* .
+cp -ad /tmp/src/dist/.* .
+
 ls -la
 
 if [ -d ./nginx-cfg ]; then
