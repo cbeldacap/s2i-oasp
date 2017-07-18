@@ -78,19 +78,6 @@ else
   exit 1
 fi
 
-
-
-# A microservices should only have 1 fat jar
-#if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.war | wc -l) -eq 1 ]; then
-#  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.war into ${DEPLOY_DIR}/app.war"
-#  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.war ${DEPLOY_DIR}/app.war
-#  [ ! -f ${DEPLOY_DIR}/app.war ] && echo "Application could not be properly built." && exit 1
-#  echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
-#else
-#  echo "[ERROR] No *.war file located in ${DEPLOY_DIR}"
-#  exit 1
-#fi
-
 echo "---> Cleaning up ..."
 rm -rf ${HOME}/.m2/repository/*
 
