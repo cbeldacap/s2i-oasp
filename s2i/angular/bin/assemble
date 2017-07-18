@@ -20,7 +20,7 @@ sed -i "s|REST_ENDPOINT|$REST_ENDPOINT|" $TARGET_ENV_FILE
 echo "---> Building sources ..."
 export npm_config_tmp=/tmp
 yarn upgrade
-npm rebuild node-sass --force
+#npm rebuild node-sass --force
 yarn build:$BUILD_TARGET
 
 echo "---> Moving sources ..."
