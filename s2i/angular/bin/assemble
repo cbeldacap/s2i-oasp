@@ -2,16 +2,29 @@
 
 set -e
 
+# Sources to build will be here
+LOCAL_SOURCE_DIR=/tmp/src
+
+# The location of the final application
+TARGET_SOURCE_DIR=/opt/app-root/src
+
 # Build the angular frontend
+
+cd $LOCAL_SOURCE_DIR
+
+echo "---> Configure sources ..."
+TARGET_ENV_FILE="src/environments/environment.$BUILD_TARGET.ts"
+cp src/environments/$TEMPLATE_FILE $TARGET_ENV_FILE
+sed -i "s|REST_ENDPOINT|$REST_ENDPOINT|" $TARGET_ENV_FILE
+cat $TARGET_ENV_FILE
 echo "---> Building sources ..."
-cd /tmp/src
 export npm_config_tmp=/tmp
 yarn upgrade
 npm rebuild node-sass --force
-yarn build:prod
+yarn build:$BUILD_TARGET
 
 echo "---> Moving sources ..."
-cp -ad /tmp/src/dist/* /opt/app-root/src
+cp -ad $LOCAL_SOURCE_DIR/$ARTIFACT_DIR/* $TARGET_SOURCE_DIR
 
 # Apply a custom nginx configuration if available
 if [ -d ./nginx-cfg ]; then

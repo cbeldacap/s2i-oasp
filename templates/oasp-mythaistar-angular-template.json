@@ -34,6 +34,11 @@
                     "displayName": "Application hostname"
                 },
                 {
+                    "description": "The URL of the backend REST endpoint.",
+                    "name": "REST_ENDPOINT",
+                    "displayName": "REST Endpoint"
+                },
+                {
                     "description": "Git source URI for application",
                     "name": "GIT_URI",
                     "value": "https://github.com/mickuehl/my-thai-star"
@@ -103,6 +108,14 @@
                                     "name": "s2i-oasp-angular:latest"
                                 },
                                 "env": [
+                                    {
+                                        "name": "BUILD_TARGET",
+                                        "value": "prod"
+                                    },
+                                    {
+                                        "name": "TEMPLATE_FILE",
+                                        "value": "environment.template.ts"
+                                    },
                                     {
                                         "name": "ARTIFACT_DIR",
                                         "value": "dist"
