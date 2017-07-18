@@ -43,6 +43,5 @@ if [ -d ./nginx-default-cfg ]; then
 fi
 
 echo "---> Cleaning up ..."
-ls -la /usr/lib/node_modules
 rm -rf /usr/lib/node_modules/*
 rm -rf $LOCAL_SOURCE_DIR
