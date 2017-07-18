@@ -66,13 +66,10 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
     exit $ERR
   fi
 
-  # Copy built artifacts (if any!) from the target/ directory
-  # (or $ARTIFACT_DIR if specified)
-  # to the $DEPLOY_DIR directory for later deployment
-  #move_artifacts "$ARTIFACT_DIR"
+  echo "---> Moving sources ..."
 
-  # clear the local maven repository after the build
-  #clear_maven_repository
+  cp -rfv $LOCAL_SOURCE_DIR/$ARTIFACT_DIR/*${APP_SUFFIX}.war $DEPLOY_DIR/app.war 2> /dev/null
+  echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
 
   popd &> /dev/null
 
@@ -81,18 +78,18 @@ else
   exit 1
 fi
 
-echo "---> Moving sources ..."
+
 
 # A microservices should only have 1 fat jar
-if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.war | wc -l) -eq 1 ]; then
-  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.war into ${DEPLOY_DIR}/app.war"
-  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.war ${DEPLOY_DIR}/app.war
-  [ ! -f ${DEPLOY_DIR}/app.war ] && echo "Application could not be properly built." && exit 1
-  echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
-else
-  echo "[ERROR] No *.war file located in ${DEPLOY_DIR}"
-  exit 1
-fi
+#if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.war | wc -l) -eq 1 ]; then
+#  echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.war into ${DEPLOY_DIR}/app.war"
+#  cp ${DEPLOY_DIR}/*${APP_SUFFIX}.war ${DEPLOY_DIR}/app.war
+#  [ ! -f ${DEPLOY_DIR}/app.war ] && echo "Application could not be properly built." && exit 1
+#  echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
+#else
+#  echo "[ERROR] No *.war file located in ${DEPLOY_DIR}"
+#  exit 1
+#fi
 
 echo "---> Cleaning up ..."
 rm -rf ${HOME}/.m2/repository/*
