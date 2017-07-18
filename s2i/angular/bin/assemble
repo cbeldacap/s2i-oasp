@@ -16,7 +16,7 @@ echo "---> Configure sources ..."
 TARGET_ENV_FILE="src/environments/environment.$BUILD_TARGET.ts"
 cp src/environments/$TEMPLATE_FILE $TARGET_ENV_FILE
 sed -i "s|REST_ENDPOINT|$REST_ENDPOINT|" $TARGET_ENV_FILE
-cat $TARGET_ENV_FILE
+
 echo "---> Building sources ..."
 export npm_config_tmp=/tmp
 yarn upgrade
