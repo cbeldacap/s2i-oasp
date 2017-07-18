@@ -20,7 +20,6 @@ sed -i "s|REST_ENDPOINT|$REST_ENDPOINT|" $TARGET_ENV_FILE
 echo "---> Building sources ..."
 export npm_config_tmp=/tmp
 yarn upgrade
-#npm rebuild node-sass --force
 yarn build:$BUILD_TARGET
 
 echo "---> Moving sources ..."
@@ -44,5 +43,6 @@ if [ -d ./nginx-default-cfg ]; then
 fi
 
 echo "---> Cleaning up ..."
-rm -rf /usr/lib/node_modules
+ls -la /usr/lib/node_modules
+rm -rf /usr/lib/node_modules/*
 rm -rf $LOCAL_SOURCE_DIR
