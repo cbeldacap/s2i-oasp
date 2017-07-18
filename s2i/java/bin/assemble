@@ -1,23 +1,22 @@
 #!/bin/bash
 
+# 
+. $(dirname $0)/functions
+
 HOME=/opt/app-root/src
 MAVEN_HOME=/usr/local/maven
 
-. $(dirname $0)/functions
-
-# we will move any code provided by s2i to here
 LOCAL_SOURCE_DIR=${HOME}/source
-mkdir -p $LOCAL_SOURCE_DIR
-
-# Resulting artifact files will be deployed to /opt/openshift
 DEPLOY_DIR=/opt/openshift
 
+echo "---> Configure sources ..."
+
+# we will move any code provided by s2i to here
+mkdir -p $LOCAL_SOURCE_DIR
+
 # Copy the source for compilation
-if compgen -G "/tmp/src/*" >/dev/null; then
-  mkdir -p $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
-  cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
-fi
+cp -ad /tmp/src/* $LOCAL_SOURCE_DIR
+cp -ad /tmp/src/.* $LOCAL_SOURCE_DIR
 
 # src provides its own mvn configuration
 if [ -d $LOCAL_SOURCE_DIR/configuration ]; then
@@ -34,6 +33,8 @@ fi
 
 configure_proxy
 configure_mirrors
+
+echo "---> Building sources ..."
 
 # If a pom.xml is present, this is a normal build scenario so run maven.
 if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
@@ -68,33 +69,33 @@ if [ -f "$LOCAL_SOURCE_DIR/pom.xml" ]; then
   # Copy built artifacts (if any!) from the target/ directory
   # (or $ARTIFACT_DIR if specified)
   # to the $DEPLOY_DIR directory for later deployment
-  move_artifacts "$ARTIFACT_DIR"
+  #move_artifacts "$ARTIFACT_DIR"
 
-  # optionally clear the local maven repository after the build
-  clear_maven_repository
+  # clear the local maven repository after the build
+  #clear_maven_repository
 
   popd &> /dev/null
 
 else
-  # For binary builds
-  # the subdirectory within LOCAL_SOURCE_DIR from where we should copy build
-  # artifacts (*.war, *.jar)
-  ARTIFACT_DIR=${ARTIFACT_DIR:-.}
-
-  copy_artifacts "$ARTIFACT_DIR" jar
+  echo "[ERROR] No pom.xml file found in '$LOCAL_SOURCE_DIR'"
+  exit 1
 fi
 
-# As Microservices you should only have 1 fat jar
-# if compgen -G "/tmp/src/*" >/dev/null; then
-# TODO: Review how best move these
+echo "---> Moving sources ..."
+
+# A microservices should only have 1 fat jar
 if [ $(ls ${DEPLOY_DIR}/*${APP_SUFFIX}.war | wc -l) -eq 1 ]; then
   echo "[INFO] Copying ${DEPLOY_DIR}/*${APP_SUFFIX}.war into ${DEPLOY_DIR}/app.war"
   cp ${DEPLOY_DIR}/*${APP_SUFFIX}.war ${DEPLOY_DIR}/app.war
   [ ! -f ${DEPLOY_DIR}/app.war ] && echo "Application could not be properly built." && exit 1
   echo "[INFO] Application war file is located in ${DEPLOY_DIR}/app.war"
 else
-  echo "[ERROR] No app.war file located in ${DEPLOY_DIR}"
+  echo "[ERROR] No *.war file located in ${DEPLOY_DIR}"
   exit 1
 fi
 
+echo "---> Cleaning up ..."
+rm -rf ${HOME}/.m2/repository/*
+
+# Success
 exit 0

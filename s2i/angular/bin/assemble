@@ -45,3 +45,6 @@ fi
 echo "---> Cleaning up ..."
 rm -rf /usr/lib/node_modules/*
 rm -rf $LOCAL_SOURCE_DIR
+
+# Success
+exit 0
