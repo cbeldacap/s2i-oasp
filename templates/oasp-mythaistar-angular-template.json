@@ -123,10 +123,6 @@
                                     {
                                         "name": "ARTIFACT_DIR",
                                         "value": "dist"
-                                    },
-                                    {
-                                        "name": "NPM_PROXY_URL",
-                                        "value": ""
                                     }
                                 ]
                             }

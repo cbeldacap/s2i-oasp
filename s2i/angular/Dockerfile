@@ -60,13 +60,11 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
     mkdir -p /usr/lib/node_modules && \
     mkdir -p /.cache && \
     mkdir -p /.config && \
-    mkdir -p /.npmrc && \
     chmod -R a+rwx /opt/app-root/etc && \
     chmod -R a+rwx /var/opt/rh/rh-nginx110 && \
     chmod -R a+rwx /usr/lib/node_modules && \
     chmod -R a+rwX /.cache && \
-    chmod -R a+rwX /.config && \
-    chmod -R a+rwX /.npmrc
+    chmod -R a+rwX /.config
 
 # Install Javascript stuff
 ENV npm_config=/tmp
@@ -78,8 +76,7 @@ RUN chown -R 1001:0 /opt/app-root && \
     chown -R 1001:0 /var/opt/rh/rh-nginx110 && \
     chown -R 1001:0 /usr/lib/node_modules && \
     chown -R 1001:0 /.cache && \
-    chown -R 1001:0 /.config && \
-    chown -R 1001:0 /.npmrc
+    chown -R 1001:0 /.config
 
 # The default user in the centos image
 USER 1001
