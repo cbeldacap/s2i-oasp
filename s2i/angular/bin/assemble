@@ -17,6 +17,13 @@ TARGET_ENV_FILE="src/environments/environment.$BUILD_TARGET.ts"
 cp src/environments/$TEMPLATE_FILE $TARGET_ENV_FILE
 sed -i "s|REST_ENDPOINT|$REST_ENDPOINT|" $TARGET_ENV_FILE
 
+if [ -n "$NPM_PROXY_URL" ]; then
+  echo "---> Configure proxy ..."
+  npm config set proxy $NPM_PROXY_URL
+  npm config set https-proxy $NPM_PROXY_URL
+  npm config set strict-ssl false
+fi
+
 echo "---> Building sources ..."
 export npm_config_tmp=/tmp
 yarn upgrade
