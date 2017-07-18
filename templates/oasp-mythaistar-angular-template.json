@@ -109,6 +109,10 @@
                                 },
                                 "env": [
                                     {
+                                        "name": "REST_ENDPOINT",
+                                        "value": "${REST_ENDPOINT}"
+                                    },
+                                    {
                                         "name": "BUILD_TARGET",
                                         "value": "prod"
                                     },
