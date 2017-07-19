@@ -1,6 +1,6 @@
 # s2i-oasp
 
-This repository contains the source for building various versions of the [reference application for OASP](https://github.com/oasp/my-thai-star) as a reproducible build using [Source-to-Image](https://github.com/openshift/source-to-image)(S2I).
+This repository contains the source for building various versions of the [reference application for OASP](https://github.com/oasp/my-thai-star) as a reproducible build using [Source-to-Image](https://github.com/openshift/source-to-image) (S2I).
 
 ## Usage
 
