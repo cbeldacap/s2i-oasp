@@ -41,7 +41,7 @@
                 {
                     "description": "Git branch/tag reference",
                     "name": "GIT_REF",
-                    "value": "develop"
+                    "value": "openshift"
                 },
                 {
                     "description": "Git Directory",
@@ -104,6 +104,7 @@
                             "sourceStrategy": {
                                 "from": {
                                     "kind": "ImageStreamTag",
+                                    "namespace": "oasp",
                                     "name": "s2i-oasp-java:latest"
                                 },
                                 "env": [
