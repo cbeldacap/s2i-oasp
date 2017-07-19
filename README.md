@@ -44,7 +44,7 @@ Create the front-end application
 
 Connect the front-end application with the backend:
 
-    oc set env bc/mythaistar-angular REST_ENDPOINT=http://`oc get routes mythaistar-angular --no-headers=true | sed -e's/  */ /g' | cut -d" " -f 2`
+    oc set env bc/mythaistar-angular REST_ENDPOINT=http://`oc get routes mythaistar-java --no-headers=true | sed -e's/  */ /g' | cut -d" " -f 2`
 
 Build the front-end application:
 
