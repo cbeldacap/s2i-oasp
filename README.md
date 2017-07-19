@@ -22,7 +22,7 @@ Make sure other projects can access the builder images:
 
     oadm policy add-role-to-group system:image-puller system:authenticated --namespace=oasp
 
-## My Thai Star DEMO
+## Build the 'My Thai Star' Reference Application
 
 To quickly deploy the [My Thai Star](https://github.com/oasp/my-thai-star) reference application, create a new project:
 
