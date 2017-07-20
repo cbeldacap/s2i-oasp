@@ -12,15 +12,10 @@ The builder images will be shared across projects and applications on the OpenSh
 
 Now add the builder images to the project and build them:
 
-    oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/base/s2i-oasp-base-imagestream.json --namespace=oasp
     oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/java/s2i-oasp-java-imagestream.json --namespace=oasp
     oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/angular/s2i-oasp-angular-imagestream.json --namespace=oasp
 
-Build the base image first:
-
-    oc start-build s2i-oasp-base --namespace=oasp
-
-Wait until the build of the base image is completed before you continue.
+Build the images first:
 
     oc start-build s2i-oasp-java --namespace=oasp
     oc start-build s2i-oasp-angular --namespace=oasp

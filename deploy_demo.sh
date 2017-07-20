@@ -2,16 +2,12 @@
 
 oadm new-project oasp --display-name='OASP' --description='Open Application Standard Platform'
 
-oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/base/s2i-oasp-base-imagestream.json --namespace=oasp
 oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/java/s2i-oasp-java-imagestream.json --namespace=oasp
 oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/angular/s2i-oasp-angular-imagestream.json --namespace=oasp
 
-oc start-build s2i-oasp-base --namespace=oasp
-sleep 120
-
 oc start-build s2i-oasp-java --namespace=oasp
 oc start-build s2i-oasp-angular --namespace=oasp
-sleep 60
+sleep 120
 
 oadm policy add-role-to-group system:image-puller system:authenticated --namespace=oasp
 
