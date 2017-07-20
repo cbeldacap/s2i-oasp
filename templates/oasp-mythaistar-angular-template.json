@@ -34,9 +34,9 @@
                     "displayName": "Application hostname"
                 },
                 {
-                    "description": "The URL of the backend REST endpoint.",
-                    "name": "REST_ENDPOINT",
-                    "displayName": "REST Endpoint"
+                    "description": "The URL of the backend's REST API endpoint",
+                    "name": "REST_ENDPOINT_URL",
+                    "displayName": "REST Endpoint URL"
                 },
                 {
                     "description": "Git source URI for application",
@@ -110,16 +110,16 @@
                                 },
                                 "env": [
                                     {
-                                        "name": "REST_ENDPOINT",
-                                        "value": "${REST_ENDPOINT}"
+                                        "name": "REST_ENDPOINT_URL",
+                                        "value": "${REST_ENDPOINT_URL}"
+                                    },
+                                    {
+                                        "name": "REST_ENDPOINT_PATTERN",
+                                        "value": "http://localhost:8081"
                                     },
                                     {
                                         "name": "BUILD_TARGET",
                                         "value": "prod"
-                                    },
-                                    {
-                                        "name": "TEMPLATE_FILE",
-                                        "value": "environment.template.ts"
                                     },
                                     {
                                         "name": "ARTIFACT_DIR",
