@@ -1,38 +1,42 @@
 # s2i-oasp-angular
-FROM 172.30.1.1:5000/oasp/s2i-oasp-base:latest
+FROM centos:centos7
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
+
+# Image version
+ENV VERSION 1.0
+ENV RELEASE 1
 
 # Set the default port for applications built using this image
 EXPOSE 8080
 EXPOSE 8443
 
-ENV STI_SCRIPTS_PATH=/usr/local/sti
+# Installed components
 ENV NGINX_VERSION=1.10
 
-ENV SUMMARY="Platform for running nginx $NGINX_VERSION or building nginx-based application" \
-    DESCRIPTION="Nginx is a web server and a reverse proxy server for HTTP, SMTP, POP3 and IMAP \
-protocols, with a strong focus on high concurrency, performance and low memory usage. The container \
-image provides a containerized packaging of the nginx $NGINX_VERSION daemon. The image can be used \
-as a base image for other applications based on nginx $NGINX_VERSION web server. \
-Nginx server image can be extended using source-to-image tool."
+ENV SUMMARY="Base image for running OASP-based AngularJS applications"
+ENV DESCRIPTION="Base image for running OASP-based AngularJS applications"
 
 LABEL summary="$SUMMARY" \
       description="$DESCRIPTION" \
       io.k8s.description="DESCRIPTION" \
-      io.k8s.display-name="Nginx 1.10" \
-      io.openshift.expose-services="8080:http" \
-      io.openshift.expose-services="8443:https" \
-      io.openshift.tags="builder,nginx,rh-nginx110" \
-      com.redhat.component="rh-nginx110-docker" \
-      name="centos/nginx-110-centos7" \
-      version="1.10" \
-      release="1"
+      io.k8s.display-name="oasp-angular" \
+      io.openshift.tags="builder,s2i,oasp,javascript,nginx,angularjs" \
+      name="oasp/s2i-oasp-angular" \
+      version="$VERSION" \
+      release="$RELEASE"
 
+ENV STI_SCRIPTS_PATH=/usr/local/sti
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 
+# Gain access to EPEL (Extra Packages for Enterprise Linux)
+RUN yum install -y epel-release
+
+# Clean the cache (see https://access.redhat.com/articles/1320623)
+RUN rm -fr /var/cache/yum/* && yum clean all 
+
 # Packages to add
-ENV INSTALL_PKGS "rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
+ENV INSTALL_PKGS "curl tar unzip bc which lsof make nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
 
 # Install extra packages
 RUN yum install -y yum-utils gettext hostname && \
@@ -42,7 +46,7 @@ RUN yum install -y yum-utils gettext hostname && \
     rpm -V $INSTALL_PKGS && \
     yum clean all
 
-# Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
+# Copy the S2I scripts to $STI_SCRIPTS_PATH
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY s2i/angular/bin/ $STI_SCRIPTS_PATH
 
@@ -76,9 +80,6 @@ RUN chown -R 1001:0 /opt/app-root && \
     chown -R 1001:0 /.cache && \
     chown -R 1001:0 /.config
 
-# The default user in the centos image
-USER 1001
-
 VOLUME ["/opt/rh/rh-nginx110/root/usr/share/nginx/html"]
 VOLUME ["/var/opt/rh/rh-nginx110/log/nginx/"]
 
@@ -86,4 +87,8 @@ ENV BASH_ENV=/opt/app-root/etc/scl_enable \
     ENV=/opt/app-root/etc/scl_enable \
     PROMPT_COMMAND=". /opt/app-root/etc/scl_enable"
 
+# The default user in the centos image
+USER 1001
+
+# Set the default CMD for the image
 CMD $STI_SCRIPTS_PATH/usage
