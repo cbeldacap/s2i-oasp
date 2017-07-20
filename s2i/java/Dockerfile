@@ -9,11 +9,10 @@ ENV JAVA_VERSION 1.8.0
 ENV MAVEN_VERSION 3.5.0
 
 # Packages to add
-ENV INSTALL_PKGS "curl tar unzip java-$JAVA_VERSION-openjdk java-$JAVA_VERSION-openjdk-devel"
+ENV INSTALL_PKGS "java-$JAVA_VERSION-openjdk java-$JAVA_VERSION-openjdk-devel"
 
 # Install extra packages
-RUN yum install -y yum-utils gettext hostname && \
-    yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
+RUN yum install -y --enablerepo=centosplus $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all
 

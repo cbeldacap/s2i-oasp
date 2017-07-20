@@ -32,7 +32,7 @@ ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 
 # Packages to add
-ENV INSTALL_PKGS "rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64"
+ENV INSTALL_PKGS "rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
 
 # Install extra packages
 RUN yum install -y yum-utils gettext hostname && \
