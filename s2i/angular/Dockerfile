@@ -1,4 +1,3 @@
-# s2i-oasp-angular
 FROM centos:centos7
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 

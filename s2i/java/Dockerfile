@@ -1,4 +1,3 @@
-# s2i-oasp-java
 FROM centos:centos7
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 
@@ -57,14 +56,21 @@ RUN chmod -R a+rwX $MAVEN_HOME/conf
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
 COPY s2i/java/bin/ $STI_SCRIPTS_PATH
 
-# Prepare folders etc.
+# In order to drop the root user, we have to make some directories world
+# writeable as OpenShift default security model is to run the container under
+# random UID.
 RUN mkdir -p /opt/openshift && \
-    mkdir -p /opt/app-root/source && chmod -R a+rwX /opt/app-root/source && \
-    mkdir -p /opt/s2i/destination && chmod -R a+rwX /opt/s2i/destination && \
-    mkdir -p /opt/app-root/src && chmod -R a+rwX /opt/app-root/src
-
-RUN chown -R 1001:1001 /opt/openshift
-RUN chmod -R 777 /usr/local/sti
+    mkdir -p /opt/app-root/source && \
+    mkdir -p /opt/s2i/destination && \
+    mkdir -p /opt/app-root/src && \
+    chmod -R a+rwx /opt/openshift && \
+    chmod -R a+rwx /opt/app-root/source && \
+    chmod -R a+rwx /opt/s2i/destination && \
+    chmod -R a+rwx /opt/app-root/src && \
+    chown -R 1001:0 /opt/openshift && \
+    chown -R 1001:0 /opt/app-root/source && \
+    chown -R 1001:0 /opt/s2i/destination && \
+    chown -R 1001:0 /opt/app-root/src
 
 # The default user in the centos image
 USER 1001
