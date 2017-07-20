@@ -1,5 +1,5 @@
 # s2i-oasp-angular
-FROM centos:centos7
+FROM 172.30.1.1:5000/oasp/s2i-oasp-base:latest
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 
 # Set the default port for applications built using this image
@@ -31,17 +31,15 @@ LABEL summary="$SUMMARY" \
 ENV NGINX_CONFIGURATION_PATH=/opt/app-root/etc/nginx.d
 ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 
-# Gain access to EPEL (Extra Packages for Enterprise Linux)
-RUN yum install -y epel-release
+# Packages to add
+ENV INSTALL_PKGS "rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64"
 
 # Install extra packages
 RUN yum install -y yum-utils gettext hostname && \
     yum install -y centos-release-scl-rh epel-release && \
     yum-config-manager --enable centos-sclo-rh-testing && \
-    INSTALL_PKGS="nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx" && \
-    INSTALL_DEV_PKGS="npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign" && \
-    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS $INSTALL_DEV_PKGS && \
-    rpm -V $INSTALL_PKGS $INSTALL_DEV_PKGS && \
+    yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
+    rpm -V $INSTALL_PKGS && \
     yum clean all
 
 # Copy the S2I scripts from the specific language image to $STI_SCRIPTS_PATH
