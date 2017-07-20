@@ -67,7 +67,6 @@
               "iconClass": "icon-java",
               "tags": "builder,java,maven,springboot,oasp,microservices,fatjar",
               "supports": "java:8,maven:3,oasp:2.4",
-              "sampleRepo": "https://github.com/mickuehl/s2i-oasp.git",
               "version": "1.0"
             }
           }

@@ -20,6 +20,9 @@ LABEL summary="$SUMMARY" \
 # Gain access to EPEL (Extra Packages for Enterprise Linux)
 RUN yum install -y epel-release
 
+# Clean the cache (see https://access.redhat.com/articles/1320623)
+RUN rm -fr /var/cache/yum/* && yum clean all 
+
 # Packages to add
 ENV INSTALL_PKGS "nss_wrapper bind-utils"
 ENV INSTALL_DEV_PKGS "npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
