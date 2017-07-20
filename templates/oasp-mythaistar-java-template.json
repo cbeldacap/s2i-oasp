@@ -41,7 +41,7 @@
                 {
                     "description": "Git branch/tag reference",
                     "name": "GIT_REF",
-                    "value": "openshift"
+                    "value": "develop"
                 },
                 {
                     "description": "Git Directory",
