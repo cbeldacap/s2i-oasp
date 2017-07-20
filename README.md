@@ -4,7 +4,7 @@ This repository contains the source for building various versions of the [refere
 
 ## Usage
 
-### Deploy the builder images
+### Deploy the source-2-image build streams
 
 The builder images will be shared across projects and applications on the OpenShift cluster. To get started, create a dedicated `oasp` project first.
 
@@ -14,9 +14,6 @@ Now add the builder images to the project and build them:
 
     oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/java/s2i-oasp-java-imagestream.json --namespace=oasp
     oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/angular/s2i-oasp-angular-imagestream.json --namespace=oasp
-
-Build the images first:
-
     oc start-build s2i-oasp-java --namespace=oasp
     oc start-build s2i-oasp-angular --namespace=oasp
     
@@ -24,7 +21,7 @@ Make sure other projects can access the builder images:
 
     oadm policy add-role-to-group system:image-puller system:authenticated --namespace=oasp
 
-## Build the 'My Thai Star' Reference Application
+## Deploy the 'My Thai Star' Reference Application
 
 To quickly deploy the [My Thai Star](https://github.com/oasp/my-thai-star) reference application, create a new project:
 
@@ -52,3 +49,6 @@ Build the front-end application:
 
     oc start-build mythaistar-angular --namespace=mythaistar
 
+## Build
+
+Use script `build.sh` to automatically install all templates and build the reference application. 
