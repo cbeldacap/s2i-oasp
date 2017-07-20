@@ -25,7 +25,7 @@ RUN rm -fr /var/cache/yum/* && yum clean all
 
 # Packages to add
 ENV INSTALL_PKGS "nss_wrapper bind-utils"
-ENV INSTALL_DEV_PKGS "npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
+ENV INSTALL_DEV_PKGS "autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
 
 # Install packages
 RUN yum install -y yum-utils gettext hostname && \

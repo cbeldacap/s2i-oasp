@@ -1,5 +1,6 @@
 # s2i-oasp-java
-FROM 172.30.1.1:5000/oasp/s2i-oasp-base:latest
+#FROM 172.30.1.1:5000/oasp/s2i-oasp-base:latest
+FROM oasp/s2i-oasp-base:latest
 MAINTAINER Michael Kuehl <mkuehl@redhat.com>
 
 # Gain access to EPEL (Extra Packages for Enterprise Linux)
