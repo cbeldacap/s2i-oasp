@@ -7,7 +7,13 @@ oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/s2i/angu
 
 oc start-build s2i-oasp-java --namespace=oasp
 oc start-build s2i-oasp-angular --namespace=oasp
-sleep 120
+
+ret=`oc status -v -n oasp | grep 'running for'`
+while [[ !  -z  $ret  ]]; do
+    echo "Waiting for build to complete..."
+    ret=`oc status -v -n oasp | grep 'running for'`
+    sleep 30
+done
 
 oadm policy add-role-to-group system:image-puller system:authenticated --namespace=oasp
 
