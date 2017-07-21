@@ -11,7 +11,7 @@
             "metadata": {
                 "name": "oasp-mythaistar-angular-sample",
                 "annotations": {
-                    "description": "My Thai Star sample application (client/angular)",
+                    "description": "My Thai Star sample application (angular/front-end)",
                     "iconClass": "icon-nodejs",
                     "tags": "instant-app,oasp,javascript,angular"
                 }

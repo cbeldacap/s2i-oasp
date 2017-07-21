@@ -42,7 +42,13 @@ That's all !
 
 Use script `build.sh` to automatically install and build all image streams. The script also creates a project 'My Thai Star' and deploys the reference application.
 
-### References
+### Further documentation
 
 * The '[My Thai Star](templates/mythaistar)' reference application templates
 
+
+### References
+
+This is a list of useful articels etc I found while creating the templates.
+
+* [Template Icons](https://github.com/openshift/openshift-docs/issues/1329)

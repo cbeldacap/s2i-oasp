@@ -11,8 +11,8 @@
             "metadata": {
                 "name": "oasp-mythaistar-java-sample",
                 "annotations": {
-                    "description": "My Thai Star sample application (server)",
-                    "iconClass": "icon-java",
+                    "description": "My Thai Star sample application (java/backend)",
+                    "iconClass": "icon-openjdk",
                     "tags": "instant-app,oasp,springboot,maven,java"
                 }
             },
