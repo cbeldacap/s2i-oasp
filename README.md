@@ -44,5 +44,5 @@ Use script `build.sh` to automatically install and build all image streams. The 
 
 ### References
 
-* The '[My Thai Star](templates/mythaistar/README.md)' reference application templates
+* The '[My Thai Star](templates/mythaistar)' reference application templates
 
