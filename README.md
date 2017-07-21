@@ -45,10 +45,12 @@ Use script `build.sh` to automatically install and build all image streams. The 
 ### Further documentation
 
 * The '[My Thai Star](templates/mythaistar)' reference application templates
+* [Source-2-Image](https://github.com/openshift/source-to-image)
+* [Open Application Standard Platform](https://github.com/oasp)
 
-
-### References
+### Links & References
 
 This is a list of useful articels etc I found while creating the templates.
 
 * [Template Icons](https://github.com/openshift/openshift-docs/issues/1329)
+* [Red Hat Cool Store Microservice Demo](https://github.com/jbossdemocentral/coolstore-microservice)
