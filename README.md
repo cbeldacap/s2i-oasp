@@ -1,6 +1,6 @@
 # Open Application Standard Platform Source-To-Image (S2I)
 
-This project provides OpenShift builder images for each of the Open Application Standard Platform (OASP) components.
+This project provides OpenShift builder images for each of the Open Application Standard Platform ([OASP(https://github.com/oasp)]) components.
 
 
 ## Overview
