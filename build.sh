@@ -19,8 +19,8 @@ done
 oadm policy add-role-to-group system:image-puller system:authenticated --namespace=oasp
 
 oadm new-project mythaistar --display-name='My Thai Star' --description='My Thai Star reference application for OASP'
-oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/templates/oasp-mythaistar-java-template.json --namespace=mythaistar
-oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/templates/oasp-mythaistar-angular-template.json --namespace=mythaistar
+oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/templates/mythaistar/oasp-mythaistar-java-template.json --namespace=mythaistar
+oc create -f https://raw.githubusercontent.com/mickuehl/s2i-oasp/master/templates/mythaistar/oasp-mythaistar-angular-template.json --namespace=mythaistar
 
 oc new-app --template=oasp-mythaistar-java-sample --namespace=mythaistar
 oc start-build mythaistar-java --namespace=mythaistar
