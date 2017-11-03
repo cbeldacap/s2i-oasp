@@ -10,7 +10,7 @@ EXPOSE 8080
 
 # Installed components
 ENV JAVA_VERSION 1.8.0
-ENV MAVEN_VERSION 3.5.0
+ENV MAVEN_VERSION 3.5.2
 
 ENV SUMMARY="Base image for running OASP-based java applications"
 ENV DESCRIPTION="Base image for running OASP-based java applications"
