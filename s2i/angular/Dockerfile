@@ -32,7 +32,7 @@ ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 RUN yum install -y epel-release
 
 # Install SUDO and CURL (for correct NodeJS version: 8.9.1 LTS)
-RUN yum install curl sudo npm
+RUN yum install curl sudo
 
 # Clean the cache (see https://access.redhat.com/articles/1320623)
 RUN rm -fr /var/cache/yum/* && yum clean all 
