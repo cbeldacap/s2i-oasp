@@ -33,7 +33,8 @@ RUN yum install -y epel-release
 RUN yum update -y
 
 # Install SUDO and CURL (for correct NodeJS version: 8.9.1 LTS)
-RUN yum install -y curl sudo
+RUN yum install curl sudo -y
+RUN yum update -y
 
 # Clean the cache (see https://access.redhat.com/articles/1320623)
 RUN rm -fr /var/cache/yum/* && yum clean all 
@@ -50,8 +51,8 @@ RUN yum install -y yum-utils gettext hostname && \
     yum clean all
 
 # Install NodeJS 8.9.1 LTS
-RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
-RUN yum install nodejs
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | bash -
+RUN yum install -y nodejs
 
 # Copy the S2I scripts to $STI_SCRIPTS_PATH
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
