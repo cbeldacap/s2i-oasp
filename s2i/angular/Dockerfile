@@ -31,11 +31,14 @@ ENV NGINX_DEFAULT_CONF_PATH=/opt/app-root/etc/nginx.default.d
 # Gain access to EPEL (Extra Packages for Enterprise Linux)
 RUN yum install -y epel-release
 
+# Install SUDO and CURL (for correct NodeJS version: 8.9.1 LTS)
+RUN yum install curl sudo npm
+
 # Clean the cache (see https://access.redhat.com/articles/1320623)
 RUN rm -fr /var/cache/yum/* && yum clean all 
 
 # Packages to add
-ENV INSTALL_PKGS "curl tar unzip bc which lsof make nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx npm http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
+ENV INSTALL_PKGS "curl tar unzip bc which lsof make nss_wrapper bind-utils rh-nginx110 rh-nginx110-nginx http-parser.x86_64 autoconf automake binutils bison flex gcc gcc-c++ gettext libtool make patch pkgconfig redhat-rpm-config rpm-build rpm-sign"
 
 # Install extra packages
 RUN yum install -y yum-utils gettext hostname && \
@@ -44,6 +47,10 @@ RUN yum install -y yum-utils gettext hostname && \
     yum install -y --setopt=tsflags=nodocs $INSTALL_PKGS && \
     rpm -V $INSTALL_PKGS && \
     yum clean all
+
+# Install NodeJS 8.9.1 LTS
+RUN curl --silent --location https://rpm.nodesource.com/setup_8.x | sudo bash -
+RUN yum install nodejs
 
 # Copy the S2I scripts to $STI_SCRIPTS_PATH
 LABEL io.openshift.s2i.scripts-url=image:///usr/local/sti
