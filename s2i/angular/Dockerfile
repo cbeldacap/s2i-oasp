@@ -78,8 +78,9 @@ RUN sed -i -f /opt/app-root/nginxconf.sed /etc/opt/rh/rh-nginx110/nginx/nginx.co
 
 # Install Javascript stuff
 ENV npm_config=/tmp
-RUN npm install -g yarn node-sass
-RUN npm rebuild node-sass --force
+RUN npm install -g yarn
+# RUN npm install -g yarn node-sass
+# RUN npm rebuild node-sass --force
 
 # Change permissions
 RUN chown -R 1001:0 /opt/app-root && \
