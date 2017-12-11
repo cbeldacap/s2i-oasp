@@ -115,7 +115,7 @@
                                     },
                                     {
                                         "name": "REST_ENDPOINT_PATTERN",
-                                        "value": "http://devonfwbackend"
+                                        "value": "http://localhost:8081"
                                     },
                                     {
                                         "name": "BUILD_TARGET",
