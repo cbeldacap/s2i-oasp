@@ -6,7 +6,7 @@ ENV VERSION 1.0
 ENV RELEASE 1
 
 # Set the default port for applications built using this image
-EXPOSE 8080
+EXPOSE 8081
 
 # Installed components
 ENV JAVA_VERSION 1.8.0
